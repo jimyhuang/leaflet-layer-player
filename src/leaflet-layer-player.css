@@ -1,8 +1,18 @@
+.slide-title {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  font-family: "儷黑 Pro", "LiHei Pro", "微軟正黑體", "Microsoft JhengHei", sans-serif;
+  z-index: 1001;
+  color: #FFF;
+  text-shadow: 0 0 15px #333;
+}
+
 /* control bar */
 .leaflet-control-container .controlbar {
   min-width: 480px;
-  margin-bottom: 20px !important;
-
+  margin-bottom: 50px !important;
 }
 .controlbar .slide-icon {
   display: inline-block;
@@ -15,10 +25,6 @@
 }
 .controlbar .slide-icon:hover {
   text-shadow: 0 0 5px #FFF;
-}
-.controlbar .slider {
-  display: inline-block;
-  width: 500px;
 }
 
 /* overlay */
@@ -38,28 +44,18 @@
   cursor: pointer;
   text-shadow: 0 0 10px #CCCCCC;
 }
-
-.slide-legend, .slide-slider, .spinner {
-  text-align:right;
-  font-family: "儷黑 Pro", "LiHei Pro", "微軟正黑體", "Microsoft JhengHei", sans-serif;
-  color: #FFFFFF;
-  text-shadow: 0 0 8px #000000;
-}
-.slide-legend h3 {
-  font-size: 26px;
-}
-.slide-slider .indicator {
-  font-size: 16px;
-  padding-right: 10px;
-  cursor: pointer;
-  color: #EFEFEF;
-}
 .spinner {
   font-size: 20px;
   display:none;
 }
 
 /* slider */
+.controlbar .slider {
+  display: inline-block;
+  position: absolute;
+  left: 160px;
+  bottom: 5px;
+}
 .controlbar .ui-slider-horizontal.ui-slider-pips {
   margin-bottom: 0;
 }
@@ -96,4 +92,21 @@
 .controlbar .ui-slider-pip:hover .ui-slider-label {
   color: #FFF !important;
   text-shadow: 0 0 4px #FFF;
+}
+
+/* chart */
+svg.chart {
+  z-index: 999;
+  background: transparent;
+  position: absolute;
+  bottom: 0;
+  left: 200px;
+}
+svg.chart .bar {
+  z-index: 999;
+  fill: rgba(60, 140, 194, 0.58)
+}
+svg.chart .text {
+  fill: rgba(255, 255, 255, 0.58);
+  font-size: 22px;
 }
