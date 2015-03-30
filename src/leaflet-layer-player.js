@@ -74,22 +74,37 @@ L.Control.LayerPlayer = L.Control.extend({
 
   addControlBar: function(div) {
     var $overlay = this.$overlay;
-    var $control = $(div);
     var opt = this.options;
     var slides = opt.slides;
     var obj = this;
 
-    // control panel
+    // control button
     var $play = $('<i class="fa fa-play slide-icon slide-play" id="splay-' + this._rid + '"></i>');
     var $pause = $('<i class="fa fa-pause slide-icon slide-pause" id="spause-' + this._rid + '"></i>');
     var $prev = $('<i class="fa fa-backward slide-icon slide-prev" id="sprev-' + this._rid + '"></i>');
     var $next = $('<i class="fa fa-forward slide-icon slide-next" id="snext-' + this._rid + '"></i>');
-    $control.append($play);
-    $control.append($pause);
-    $control.append($prev);
-    $control.append($next);
+    var $controlbutton = $('<div class="controlbutton"></div>');
+    $controlbutton.append($play);
+    $controlbutton.append($pause);
+    $controlbutton.append($prev);
+    $controlbutton.append($next);
+
+    $next.click(function(e) {
+      obj.next();
+    });
+    $prev.click(function(e) {
+      obj.prev();
+    });
+    $play.click(function(e) {
+      obj.play();
+    });
+    $pause.click(function(e) {
+      obj.pause();
+    });
+    $controlbutton.appendTo(this.$map);
     
     // jquery ui slider
+    var $control = $(div);
     var $slider = $('<div id="slider-' + this._rid + '" class="slider"></div>');
     var labels = [];
     for (var i = 0; i < this._length; i++){
@@ -108,21 +123,8 @@ L.Control.LayerPlayer = L.Control.extend({
     .on("slidechange", function(e, ui) {
       obj._changeLayer(ui.value);
     });
-    $slider.width(this.$map.width() - 280);
+    $slider.width(this.$map.width() - 200);
     $control.append($slider);
-
-    $next.click(function(e) {
-      obj.next();
-    });
-    $prev.click(function(e) {
-      obj.prev();
-    });
-    $play.click(function(e) {
-      obj.play();
-    });
-    $pause.click(function(e) {
-      obj.pause();
-    });
     return $control;
   },
 
@@ -198,14 +200,15 @@ L.Control.LayerPlayer = L.Control.extend({
     this._idx = i;
     var slide = this.options.slides.rows[i];
     var idx = i + 1;
-    this.$map.find('.current').fadeOut(600);
-    this.$map.find('.current').removeClass('current');
+    var $c = this.$map.find('.current:eq(0)');
+    $c.removeClass('current');
 
     var current = this.$map.find('.leaflet-tile-pane .leaflet-layer:eq(' + idx + ')');
     current.addClass('current');
     current.hide();
     current.css('z-index', 999);
-    current.fadeIn(300);
+    current.show();
+    $c.hide();
     this.$map.find('.leaflet-tile-pane .leaflet-layer').not('.current').css('z-index', 0);
   },
 

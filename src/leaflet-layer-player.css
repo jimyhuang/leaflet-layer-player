@@ -2,28 +2,32 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 28px;
-  font-family: "儷黑 Pro", "LiHei Pro", "微軟正黑體", "Microsoft JhengHei", sans-serif;
+  font-size: 30px;
+  font-family: "儷黑 Pro", "LiHei Pro", "Microsoft JhengHei", sans-serif;
   z-index: 1001;
   color: #FFF;
-  text-shadow: 0 0 15px #333;
+  text-shadow: 1px 1px 8px #333;
 }
 
-/* control bar */
-.leaflet-control-container .controlbar {
-  min-width: 480px;
-  margin-bottom: 50px !important;
+/* control button */
+.controlbutton {
+  min-width: 150px;
+  position: absolute;
+  z-index:1000;
+  left: 50px;
+  top: 30px;
 }
-.controlbar .slide-icon {
+.controlbutton .slide-icon {
   display: inline-block;
   width: 20px;
   font-size: 20px;
   margin: 0 5px;
+  z-index:1000;
   color: #EFEFEF;
   cursor: pointer;
   text-shadow: 0 0 10px #333;
 }
-.controlbar .slide-icon:hover {
+.controlbutton .slide-icon:hover {
   text-shadow: 0 0 5px #FFF;
 }
 
@@ -50,10 +54,14 @@
 }
 
 /* slider */
+.leaflet-control-container .controlbar {
+  min-width: 480px;
+  margin-bottom: 50px !important;
+}
 .controlbar .slider {
   display: inline-block;
   position: absolute;
-  left: 160px;
+  left: 30px;
   bottom: 5px;
 }
 .controlbar .ui-slider-horizontal.ui-slider-pips {
@@ -100,7 +108,7 @@ svg.chart {
   background: transparent;
   position: absolute;
   bottom: 0;
-  left: 200px;
+  left: 70px;
 }
 svg.chart .bar {
   z-index: 999;
@@ -108,5 +116,5 @@ svg.chart .bar {
 }
 svg.chart .text {
   fill: rgba(255, 255, 255, 0.58);
-  font-size: 22px;
+  font-size: 20px;
 }
