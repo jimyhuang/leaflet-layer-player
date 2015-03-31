@@ -202,13 +202,12 @@ L.Control.LayerPlayer = L.Control.extend({
     var idx = i + 1;
     var $c = this.$map.find('.current:eq(0)');
     $c.removeClass('current');
+    $c.hide();
 
     var current = this.$map.find('.leaflet-tile-pane .leaflet-layer:eq(' + idx + ')');
     current.addClass('current');
-    current.hide();
     current.css('z-index', 999);
     current.show();
-    $c.hide();
     this.$map.find('.leaflet-tile-pane .leaflet-layer').not('.current').css('z-index', 0);
   },
 
