@@ -1,7 +1,7 @@
 .slide-title {
   position: absolute;
   top: 10px;
-  right: 10px;
+  left: 10px;
   font-size: 30px;
   font-family: "LiHei Pro", "Microsoft JhengHei", sans-serif;
   z-index: 1001;
@@ -13,9 +13,9 @@
 .controlbutton {
   min-width: 150px;
   position: absolute;
-  z-index:1000;
-  left: 50px;
-  top: 30px;
+  z-index:1001;
+  left: 10px;
+  top: 60px;
 }
 .controlbutton .slide-icon {
   display: inline-block;
@@ -38,7 +38,15 @@
   text-align: center;
   vertical-align: center;
   background: rgba(33,33,33, .7);
+  background: -webkit-radial-gradient(center,ellipse cover,rgba(0,0,0,0.1) 0,rgba(0,0,0,0.8) 70%);
+  background: -o-radial-gradient(center,ellipse cover,rgba(0,0,0,0.1) 0,rgba(0,0,0,0.8) 70%);
+  background: -ms-radial-gradient(center,ellipse cover,rgba(0,0,0,0.1) 0,rgba(0,0,0,0.8) 70%);
+  background: radial-gradient(center,ellipse cover,rgba(0,0,0,0.1) 0,rgba(0,0,0,0.8) 70%);
   z-index: 1001;
+}
+.overlay.runned{
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 100%);
+  z-index: 999;
 }
 .overlay i {
   position: absolute;
