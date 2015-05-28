@@ -23,6 +23,13 @@ L.Control.LayerPlayer = L.Control.extend({
 
   onAdd: function(map) {
     this.options.map = map;
+    
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+    map.boxZoom.disable();
+    map.keyboard.disable();
+
     this.$map = $(map._container);
     this.addTitle();
     if (this.options.overlay) {
@@ -60,10 +67,10 @@ L.Control.LayerPlayer = L.Control.extend({
     this.$overlay.width(this.$map.width());
     this.$map.prepend(this.$overlay);
     var $o = this.$overlay;
-    setTimeout(function() {
+    $(window).load(function() {
       $o.html('');
       $o.append($play);
-    }, this.options.loadingDelay);
+    });
   },
 
   addTitle: function() {
@@ -74,6 +81,7 @@ L.Control.LayerPlayer = L.Control.extend({
 
   addControlBar: function(div) {
     var $overlay = this.$overlay;
+    var $map = this.$map;
     var opt = this.options;
     var slides = opt.slides;
     var obj = this;
@@ -101,6 +109,43 @@ L.Control.LayerPlayer = L.Control.extend({
     $pause.click(function(e) {
       obj.pause();
     });
+    $(document).keydown(function(e){
+      if ((e.keyCode || e.which) == 37){ //left
+        obj.prev();
+      }
+      if ((e.keyCode || e.which) == 39){ //right
+        obj.next();
+      }
+      if ((e.keyCode || e.which) == 32){ //space 
+        obj.pause();
+      }
+      if ((e.keyCode || e.which) == 13){ //enter
+        obj.play();
+      }
+    });
+
+    var wheeling = 0;
+    $map.mouseover(function(){
+      $map.bind('mousewheel', function(e){
+        e.preventDefault();
+        if(!wheeling){
+          wheeling++;
+          if(e.originalEvent.wheelDelta /120 > 0) {
+            setTimeout(function(){
+              obj.prev();
+              wheeling = 0;
+            }, 100);
+          }
+          else{
+            setTimeout(function(){
+              obj.next();
+              wheeling = 0;
+            }, 100);
+          }
+        }
+      });
+    });
+    
     $controlbutton.appendTo(this.$map);
     
     // jquery ui slider
@@ -225,6 +270,9 @@ L.Control.LayerPlayer = L.Control.extend({
 
   play: function() {
     var obj = this;
+    if(this._idx == obj._length){
+      this._idx = 0;
+    }
     var i = this._idx;
     var layeridx = i++;
     this.$overlay.fadeOut();
