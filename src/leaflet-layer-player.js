@@ -6,9 +6,8 @@ L.Control.LayerPlayer = L.Control.extend({
     tms: false,
     maxZoom: 13,
     attribution: '',
-    playInterval: 2000,
+    playInterval: 1000,
     overlay: true,
-    loadingDelay: 3500,
     chart: false
   },
   
@@ -44,6 +43,7 @@ L.Control.LayerPlayer = L.Control.extend({
     if (this.options.chart) {
       this.addChart();
     }
+    $(".leaflet-control-zoom").appendTo(".leaflet-control-container .leaflet-top.leaflet-right");
     return $control[0];
   },
 
@@ -275,7 +275,8 @@ L.Control.LayerPlayer = L.Control.extend({
     }
     var i = this._idx;
     var layeridx = i++;
-    this.$overlay.fadeOut();
+    this.$overlay.find(".slide-play").remove();
+    this.$overlay.addClass('runned');
     this.options.interval = setInterval(function() {
       if(i >= obj._length ){
         i = 0;
