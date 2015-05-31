@@ -51,6 +51,7 @@
 .overlay i {
   position: absolute;
   top: 45%;
+  left: 47%;
   font-size: 60px;
   color: #EFEFEF;
   cursor: pointer;
